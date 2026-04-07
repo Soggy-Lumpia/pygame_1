@@ -14,7 +14,7 @@ def navTerrain()-> int:
     position: int = 0
     inventory = ["","",""]
     
-    menuActions = [1,2,3,4,5,6]
+    menuActions = [0,1,2,3,4,5]
 
     while True: 
         print("Here are your current items: \n")
@@ -28,32 +28,32 @@ def navTerrain()-> int:
                     for j in range(0, len(menuActions)):
                         if menuActions[j] == 0:
                             print("\033[36m 1. Move Forward\033[39m\n")
-                            return 0
+                            # return 0
                             continue
                 
                         elif menuActions[j] == 1:
                             print("\033[36m 2. Move Backward\033[39m\n")
-                            return 1
+
                             continue
                 
                         elif menuActions[j] == 2:
                             print("\033[36m 3. Pick Item\033[39m\n")
-                            return 2
+
                             continue
                             
                         elif menuActions[j] == 3:
                             print("\033[36m 4. Drop Item \033[39m\n")
-                            return 3
+
                             continue
                             
                         elif menuActions[j] == 4:
                             print("\033[36m 5. Show Inventory \033[39m\n")
-                            return 4
+
                             continue
                             
                         elif menuActions[j] == 5: 
                             print("\033[36m 6. Exit \033[39m\n")
-                            return 5
+
                             
 
                         start_inputChoices = input("Choose your action: ")
@@ -145,5 +145,4 @@ navTerrain()
     
     
     
-
 
