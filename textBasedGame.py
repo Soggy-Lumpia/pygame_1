@@ -15,12 +15,6 @@ def navTerrain()-> int:
     inventory = ["","",""]
     game_running = True
     
-    menuActions = ["1. Move Forward",
-        "2. Move Backward",
-        "3. Pick Item",
-        "4. Drop Item",
-        "5. Show Inventory",
-        "6. Exit"]
     
     while game_running: 
         # Iterate over maps list
@@ -29,13 +23,18 @@ def navTerrain()-> int:
             print(f"Here are your current items: {inventory}\n")
             print(f"current position value: {position}\n") #DEBUG
             
-    # Forest
+            
+            print("\033[36m1. Move Forward\n2. Move Backward\n3. Pick Item\n4. Drop Item\n5. Show Inventory\n6. Exit\n\033[39m")
+        
+            break
+    # LOOP over all Locations
+        # Forest
         if maps[i] == maps[1]:
             # Learn to use .INSERT (appending value to specific index)
             # Learn to use .APPEND(appending value end of list)
             autoItem1 = inventory.insert(1,"torch")
             break
-    # Cave
+        # Cave
         if maps[i] == maps[2]:
             autoItem2 = inventory.insert(2,"key")
             break
@@ -44,105 +43,92 @@ def navTerrain()-> int:
             break
         
         # Interacting menu options 
-        for j in range(0, len(menuActions)):
-            print(f"\033[36m{menuActions[j]}\033[39m\n")
-            if menuActions[j] == menuActions[0]:
-                position += 1
-                continue
+        # for j in range(0, len(menuActions)):
+        #     print(f"\033[36m{menuActions[j]}\033[39m\n")
+        #     if menuActions[j] == menuActions[0]:
+        #         position += 1
+        #         continue
         
-            elif menuActions[j] == menuActions[1]:
-                print("\033[36m 2. Move Backward\033[39m\n")
-                # position -= 1
-                continue
+        #     elif menuActions[j] == menuActions[1]:
+        #         Move Backwards
+        #         position -= 1
+        #         continue
         
-            elif menuActions[j] == menuActions[2]:
-                # print("\033[36m 3. Pick Item\033[39m\n")
-                continue
+        #     elif menuActions[j] == menuActions[2]:
+        #         print("\033[36m 3. Pick Item\033[39m\n")
+        #         continue
                 
-            elif menuActions[j] == menuActions[3]:
-                # print("\033[36m 4. Drop Item \033[39m\n")
-                continue
+        #     elif menuActions[j] == menuActions[3]:
+        #         print("\033[36m 4. Drop Item \033[39m\n")
+        #         continue
                         
-            elif menuActions[j] == menuActions[4]:
-                # print("\033[36m 5. Show Inventory \033[39m\n")
-                continue
+        #     elif menuActions[j] == menuActions[4]:
+        #         print("\033[36m 5. Show Inventory \033[39m\n")
+        #         continue
                 
-            elif menuActions[j] == menuActions[5]: 
-                continue
+        #     elif menuActions[j] == menuActions[5]: 
+        #         game_running = False
+                
+        #         continue
                     
         # Fail-safe conditionals for Positioning:
         if position < 0:
             navTerrain()
-    
-            
+        
+        if game_running == False: 
+            print("Okay Goodbye!\n")
+            return 
+        
+        
+        # Menu interactions 
         start_inputChoices = input("Choose your action: ")
         store_player_choice = start_inputChoices
-                        
-        try:
-            # convert integer
-            conv_choice = int(store_player_choice)
-            if conv_choice >= 1 and conv_choice < 6: 
-                continue
-                
-                print(f"Current maps value: {maps[i]}\n")
-                print(f"Position: {position} <--- DEBUG MAIN ")
-                
-                if conv_choice == 1: 
-                    print("conv_choice 1\n")
-                    print(f"Position: {position} <--- DEBUG 1 ")
-                
-                if conv_choice == 2: 
-                    print("conv_choice 2\n")
-                    print(f"Position: {position} <--- DEBUG 2 ")
-                        
-                if conv_choice == 3:
-                    print("conv_choice 3\n")
-                    print(f"Position: {position} <--- DEBUG 3 ")
-                    
-                if conv_choice == 4:
-                    print("conv_choice 4\n")
-                    print(f"Position: {position} <--- DEBUG 4 ")
-                    
-                if conv_choice == 5: 
-                    print("conv_choice 5\n")
-                
-                    print(f"Position: {position} <--- DEBUG 4 ")
-                  
+        conv_choice = int(store_player_choice)
+        store_conv_choice = conv_choice
+        
 
                         
-        except ValueError: 
-            print("Please choose a whole number option!\n")
+        try:
+            
+            store_conv_choice == type(int)
+            print(f"Current maps value: {maps[i]}\n")
+            print(f"Position: {position} <--- DEBUG MAIN ")
+            print(f"successful converted_input type = {type(store_conv_choice)}")
+            
+          
+                
+        except store_conv_choice != type(int) or store_conv_choice < 1 or store_conv_choice > 6:
+            raise ValueError("Please make a choice with whole numbers of 1 through 6!")
+            print("\033[31mPlease choose a whole number option!\033[0m\n")
+            print(f"FAIL-SAFE converted_input type = {type(start_inputChoices)}")
             
                           
-                                
-                                    
-            # elif maps[i] == "Forest": 
-            #     for j in range(0, len(menuActions)):
-            #         if menuActions[j] == 1:
-            #             print("\033[36m 1. Move Forward\033[39m\n")
-            #             position += 1
-            #             continue
-            
-            #         elif menuActions[j] == 2:
-            #             print("\033[36m 2. Move Backward\033[39m\n")
-            #             continue
-            
-            #         elif menuActions[j] == 3:
-            #             print("\033[36m 3. Pick Item\033[39m\n")
-            #             continue
-                        
-            #         elif menuActions[j] == 4:
-            #             print("\033[36m 4. Drop Item \033[39m\n")
-            #             continue
-                        
-            #         elif menuActions[j] == 5:
-            #             print("\033[36m 5. Show Inventory \033[39m\n")
-            #             continue
-                        
-            #         elif menuActions[j] == 6: 
-            #             print("\033[36m 6. Exit \033[39m\n")
-                        
-        print(f"converted_input type = {type(conv_choice)}")                   
+        if store_conv_choice == 1: 
+            print("store_conv_choice 1\n")
+            position += 1
+            print(f"Position: {position} <--- DEBUG 1 ")
+            break
+           
+        elif store_conv_choice == 2: 
+            print("store_conv_choice 2\n")
+            print(f"Position: {position} <--- DEBUG 2 ")
+                   
+        elif store_conv_choice == 3:
+            print("store_conv_choice 3\n")
+            print(f"Position: {position} <--- DEBUG 3 ")
+               
+        elif store_conv_choice == 4:
+            print("store_conv_choice 4\n")
+            print(f"Position: {position} <--- DEBUG 4 ")
+               
+        elif store_conv_choice == 5: 
+            print("store_conv_choice 5\n")
+            print(f"Position: {position} <--- DEBUG 5 ")
+           
+        elif store_conv_choice == 6: 
+            print("store_conv_choice 6\n")
+            print(f"Position: {position} <--- DEBUG 6 ")             
+                           
 
         
 navTerrain()        
